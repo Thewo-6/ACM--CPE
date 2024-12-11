@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+#include <unordered_map>
+
+using namespace std;
+
+// Function to create a map of characters and their corresponding decoded values
+unordered_map<char, char> createDecodeMap() {
+    unordered_map<char, char> decodeMap;
+
+    // QWERTY Keyboard layout to left shifted values
+    string original = "qwertyuiop[]asdfghjkl;'zxcvbnm,./";
+    string shifted =  "qwertyuiop[]asdfghjkl;'zxcvbnm,./";
+
+    // Replace each letter with two keys to the left on the keyboard
+    for (int i = 2; i < original.length(); i++) {
+        decodeMap[original[i]] = original[i - 2];
+    }
+
+    return decodeMap;
+}
+
+string decodeMessage(const string& encoded) {
+    unordered_map<char, char> decodeMap = createDecodeMap();
+    string decoded = "";
+
+    // Decoding the message
+    for (char c : encoded) {
+        if (decodeMap.find(c) != decodeMap.end()) {
+            decoded += decodeMap[c];
+        } else {
+            decoded += c;  // If character is not in the map, keep it as it is
+        }
+    }
+
+    return decoded;
+}
+
+int main() {
+    string encoded;
+    getline(cin, encoded);  // Reading the encoded message
+
+    string decodedMessage = decodeMessage(encoded);
+    cout << decodedMessage << endl;
+
+    return 0;
+}

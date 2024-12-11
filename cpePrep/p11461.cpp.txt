@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Function to count square numbers between a and b
+int countSquareNumbers(int a, int b) {
+    int start = ceil(sqrt(a));
+    int end = floor(sqrt(b));
+    if (start > end) {
+        return 0; // No square numbers in the range
+    }
+    return (end - start + 1);
+}
+
+int main() {
+    int a, b;
+    while (true) {
+        cin >> a >> b;
+        if (a == 0 && b == 0) {
+            break; // End of input
+        }
+        cout << countSquareNumbers(a, b) << endl;
+    }
+    return 0;
+}
